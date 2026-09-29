@@ -1,13 +1,14 @@
 // Service worker - caches everything (precache + runtime cache)
 
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v3';
 const CACHE_NAME = `spilcafe-cache-${CACHE_VERSION}`;
 const PRECACHE_URLS = [
-    '/', '/index.html',
-    '/css/style.css', '/css/maps.css',
-    '/js/app.js', '/js/maps.js',
-    '/manifest.json',
-    '/assets/img/logo.webp', '/assets/img/favicon.ico'
+    './', './index.html',
+    './css/style.css', './css/maps.css',
+    './js/app.js',
+    './assets/games/games.json',
+    './manifest.json',
+    './assets/img/logo.webp', './assets/img/favicon.ico'
     // tilføj flere kendte assets her hvis ønsket
 ];
 
@@ -20,7 +21,7 @@ self.addEventListener('install', event => {
 
         // prøv at hente index.html og auto-opdage src/href/url(...) for yderligere præcache
         try {
-            const res = await fetch('/index.html', { cache: 'no-store' });
+            const res = await fetch('./index.html', { cache: 'no-store' });
             if (res && res.ok) {
                 const text = await res.text();
                 const urls = extractUrlsFromHtml(text);
@@ -62,7 +63,7 @@ self.addEventListener('fetch', event => {
                 cache.put(req, networkResponse.clone()).catch(()=>{});
                 return networkResponse;
             } catch (err) {
-                const cached = await caches.match('/index.html');
+                const cached = await caches.match('./index.html');
                 if (cached) return cached;
                 return new Response('Offline', { status: 503, statusText: 'Offline' });
             }
