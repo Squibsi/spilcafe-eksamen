@@ -761,7 +761,7 @@ button.card {
   font-size: 18px;
   margin-top: 10px;
   padding: 5px 10px;
-  background: #FF4747;
+  background: var(--primary-color);
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -769,7 +769,7 @@ button.card {
 }
 
 .popup-content button:hover {
-  background: #FF9292;
+  background: #7f0d11;
 }
 
 
@@ -894,7 +894,15 @@ form #debt-amount-slider label:hover::after {
 }
 
 form #debt-amount-slider input {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+form #debt-amount-slider input:focus-visible + label::after {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 3px;
 }
 
 form #debt-amount-slider input:checked+label::before {
