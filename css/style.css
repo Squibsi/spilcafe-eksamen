@@ -27,24 +27,32 @@
 
 }
 
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
 body,
 html {
-  -webkit-user-select: none;
-  /* Chrome all / Safari all */
-  -moz-user-select: none;
-  /* Firefox all */
-  -ms-user-select: none;
-  /* IE 10+ */
-  user-select: none;
-  /* Likely future */
   margin: 0;
   font-family: sans-serif;
 }
 
 /* VARIABLER! */
 :root {
-  --primary-color: #FF4747;
-  --primary-color-light: #FF9292;
+  --primary-color: #B11217;
+  --primary-color-light: #FDE8E8;
   --background-color: #F2F2F2;
   --background-color-2: #F2F2F295;
   --text-color: #000000;
@@ -92,7 +100,7 @@ header {
   border-radius: 9px;
   margin: 0 8px;
   /* background-color: #ebebeb; */
-  border: 1px solid #BF171C;
+  border: 1px solid var(--primary-color);
   width: 100%;
   height: 43px;
   border-radius: 8px;
@@ -117,6 +125,17 @@ header {
 button,
 input {
   all: unset;
+  box-sizing: border-box;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:where(a, button, input):focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 3px;
 }
 
 /* .searchInput {
@@ -197,15 +216,10 @@ h1 {
   border-radius: 8px;
   border: 1px solid #A1A1A1;
   color: #0a0a0a;
-  height: 32px;
+  min-height: 44px;
   font-weight: 200;
   white-space: nowrap;
   user-select: none;
-  outline: none;
-}
-
-/* Prevent focus outline on chips */
-.chip:focus {
   outline: none;
 }
 
