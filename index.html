@@ -110,7 +110,7 @@
                 </svg>
             </a>
 
-            <a class="chip" onclick="openShakePopup()"><svg width="32" height="32" viewBox="0 0 40 40"
+            <button class="chip" type="button" id="shakeButton" aria-label="Vælg et tilfældigt spil"><svg aria-hidden="true" width="32" height="32" viewBox="0 0 40 40"
                     style="padding:4px;" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M31.1295 3.98739C31.4605 3.38154 32.2198 3.15871 32.8257 3.48968C33.3573 3.78013 34.0835 4.33851 34.7988 5.20716C35.5188 6.08158 36.0727 7.11333 36.3922 8.30589C36.8578 10.0442 36.7167 11.6985 36.1998 13.168C36.019 13.682 35.8312 14.0656 35.6885 14.3003C35.3295 14.8901 34.5605 15.0772 33.9708 14.7184C33.4302 14.3894 33.2278 13.7158 33.4743 13.1516L33.5528 13.0007C33.61 12.9067 33.7223 12.6773 33.8415 12.3384C34.2023 11.3125 34.3007 10.1598 33.9773 8.95286C33.7545 8.12079 33.3703 7.40536 32.8688 6.79629C32.3785 6.20091 31.8992 5.83223 31.6272 5.68364C31.0213 5.35269 30.7985 4.59324 31.1295 3.98739Z"
@@ -131,10 +131,9 @@
                         d="M9.42319 27.2513C8.78544 26.987 8.05416 27.2898 7.78986 27.9275C7.76559 27.986 7.73864 28.0587 7.71076 28.144L7.62611 28.438C7.45229 29.1223 7.41372 29.8475 7.60842 30.5743C7.74442 31.0817 7.98476 31.5407 8.29616 31.955C8.58012 32.3328 8.86636 32.6067 9.08741 32.7768C9.63434 33.1982 10.4192 33.0963 10.8405 32.5493C11.2617 32.0023 11.1598 31.2175 10.6129 30.7963L10.5579 30.749C10.4914 30.6875 10.3936 30.5847 10.2945 30.4528C10.1631 30.278 10.0692 30.0985 10.0232 29.9272C9.95504 29.6727 9.97176 29.3582 10.0492 29.0535C10.0573 29.0217 10.065 28.9935 10.0719 28.9698L10.1538 28.7237C10.3109 28.1283 10.0078 27.4937 9.42319 27.2513Z"
                         fill="#212121" />
                 </svg>
-            </a>
+            </button>
 
-            <a href="/spilcafe-exam/" id="clearFiltersChip" class="chip hidden" title="Ryd alle filtre" role="button"
-                aria-hidden="true">
+            <button type="button" id="clearFiltersChip" class="chip hidden" title="Ryd alle filtre" aria-label="Ryd alle filtre">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M14 8C14 6.4087 13.3679 4.88258 12.2426 3.75736C11.1174 2.63214 9.5913 2 8 2C6.32263 2.00631 4.71265 2.66082 3.50667 3.82667L2 5.33333"
@@ -146,37 +145,37 @@
                     <path d="M10.6667 10.6665H14.0001V13.9998" stroke="#FF4747" stroke-linecap="round"
                         stroke-linejoin="round" />
                 </svg>
-            </a>
+            </button>
         </div>
 
         <div class="sub-filters-under">
             <!-- location -->
-            <section id="app" class="locationsForm">
+            <section id="location-filter" class="locationsForm" aria-label="Vælg lokation">
                 <div id="map"></div>
                 <div class="chips-container towns">
-                    <div class="chip" data-location="alle">Alle</div>
-                    <div class="chip" data-location="aarhus-fredensgade">Aarhus Fredensgade</div>
-                    <div class="chip" data-location="aarhus-vestergade">Aarhus Vestergade</div>
-                    <div class="chip" data-location="aalborg">Aalborg</div>
-                    <div class="chip" data-location="kolding">Kolding</div>
-                    <div class="chip" data-location="odense">Odense</div>
+                    <button type="button" class="chip" data-location="alle" aria-pressed="false">Alle</button>
+                    <button type="button" class="chip" data-location="aarhus-fredensgade" aria-pressed="false">Aarhus Fredensgade</button>
+                    <button type="button" class="chip" data-location="aarhus-vestergade" aria-pressed="false">Aarhus Vestergade</button>
+                    <button type="button" class="chip" data-location="aalborg" aria-pressed="false">Aalborg</button>
+                    <button type="button" class="chip" data-location="kolding" aria-pressed="false">Kolding</button>
+                    <button type="button" class="chip" data-location="odense" aria-pressed="false">Odense</button>
                 </div>
             </section>
 
             <!-- players -->
-            <div class="playersForm">
+            <div id="players-filter" class="playersForm" role="group" aria-label="Filtrér efter antal spillere">
                 <form method="GET">
                     <div id="debt-amount-slider">
                         <input type="radio" name="players" id="p-1" value="2" required>
-                        <label for="p-1" data-debt-amount="2"></label>
+                        <label for="p-1" data-debt-amount="2"><span class="visually-hidden">2 spillere</span></label>
                         <input type="radio" name="players" id="p-2" value="4" required>
-                        <label for="p-2" data-debt-amount="4"></label>
+                        <label for="p-2" data-debt-amount="4"><span class="visually-hidden">4 spillere</span></label>
                         <input type="radio" name="players" id="p-3" value="6" required>
-                        <label for="p-3" data-debt-amount="6"></label>
+                        <label for="p-3" data-debt-amount="6"><span class="visually-hidden">6 spillere</span></label>
                         <input type="radio" name="players" id="p-4" value="8" required>
-                        <label for="p-4" data-debt-amount="8"></label>
+                        <label for="p-4" data-debt-amount="8"><span class="visually-hidden">8 spillere</span></label>
                         <input type="radio" name="players" id="p-5" value="10" required>
-                        <label for="p-5" data-debt-amount="10"></label>
+                        <label for="p-5" data-debt-amount="10"><span class="visually-hidden">10 spillere</span></label>
                         <!-- <div id="debt-amount-pos"></div> -->
                     </div>
                 </form>
