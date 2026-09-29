@@ -183,11 +183,11 @@
 
 
             <!-- time -->
-            <div class="container timeForm">
+            <div id="time-filter" class="container timeForm" role="group" aria-label="Filtrér efter maksimal spilletid">
                 <!-- <h2>Spilletid (maks)</h2> -->
                 <form>
                     <div class="radio-group">
-                        <input type="radio" name="time" id="time-20" value="20" checked>
+                        <input type="radio" name="time" id="time-20" value="20">
                         <label for="time-20">20 min</label>
 
                         <input type="radio" name="time" id="time-30" value="30">
@@ -206,7 +206,7 @@
 
 
             <!-- difficulty -->
-            <div class="difficultyForm">
+            <div id="difficulty-filter" class="difficultyForm" role="group" aria-label="Filtrér efter sværhedsgrad">
                 <form>
 
                     <input type="radio" name="difficulty" id="diff-let" value="Let">
@@ -256,33 +256,39 @@
                 </form>
             </div>
 
-            <div class="genreForm">
+            <div id="genre-filter" class="genreForm" role="group" aria-label="Filtrér efter genre">
                 <div class="chips">
-                    <div class="chip" data-genre="Familie">Familie</div>
-                    <div class="chip" data-genre="Strategi">Strategi</div>
-                    <div class="chip" data-genre="Party">Party</div>
-                    <div class="chip" data-genre="Kortspil">Kortspil</div>
-                    <div class="chip" data-genre="Ordspil">Ordspil</div>
-                    <div class="chip" data-genre="Brætspil">Brætspil</div>
-                    <div class="chip" data-genre="Kooperativt">Kooperativt</div>
+                    <button type="button" class="chip" data-genre="Familie" aria-pressed="false">Familie</button>
+                    <button type="button" class="chip" data-genre="Strategi" aria-pressed="false">Strategi</button>
+                    <button type="button" class="chip" data-genre="Party" aria-pressed="false">Party</button>
+                    <button type="button" class="chip" data-genre="Kortspil" aria-pressed="false">Kortspil</button>
+                    <button type="button" class="chip" data-genre="Ordspil" aria-pressed="false">Ordspil</button>
+                    <button type="button" class="chip" data-genre="Brætspil" aria-pressed="false">Brætspil</button>
+                    <button type="button" class="chip" data-genre="Kooperativt" aria-pressed="false">Kooperativt</button>
                 </div>
             </div>
 
-            <div class="sortForm">
-                <div class="chip" data-sort="A-Z">A-Z</div>
-                <div class="chip" data-sort="Z-A">Z-A</div>
-                <div class="chip" data-sort="År">År</div>
-                <div class="chip" data-sort="Rating">Rating</div>
+            <div id="sort-filter" class="sortForm" role="group" aria-label="Sortér spil">
+                <button type="button" class="chip" data-sort="A-Z" aria-pressed="false">Titel A–Å</button>
+                <button type="button" class="chip" data-sort="Z-A" aria-pressed="false">Titel Å–A</button>
+                <button type="button" class="chip" data-sort="År" aria-pressed="false">Nyeste først</button>
+                <button type="button" class="chip" data-sort="Rating" aria-pressed="false">Bedst bedømt</button>
                 <!-- <div class="chip">Popularity</div> -->
             </div>
         </div>
     </header>
 
 
-    <div id="chip-info" class="chip-info"></div>
+    <div id="chip-info" class="chip-info" role="status" aria-live="polite" tabindex="-1"></div>
 
     <!-- main content -->
-    <main id="results"></main>
+    <main>
+        <div class="results-heading">
+            <h1>Alle spil</h1>
+            <p>Find det næste spil til bordet</p>
+        </div>
+        <section id="results" class="results" aria-label="Spil"></section>
+    </main>
 
     <!-- <div id="dices"></div> -->
 
