@@ -1,10 +1,12 @@
 // Service worker - caches everything (precache + runtime cache)
 
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v6';
 const CACHE_NAME = `spilcafe-cache-${CACHE_VERSION}`;
 const PRECACHE_URLS = [
-    './', './index.html',
-    './css/style.css', './css/maps.css',
+    './',
+    './index.html',
+    './css/style.css',
+    './css/maps.css',
     './js/app.js',
     './assets/games/games.json',
     './manifest.json',

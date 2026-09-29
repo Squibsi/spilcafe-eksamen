@@ -360,7 +360,7 @@ function filterGames() {
 function renderSubChips(filter) {
   hideAllSubForms();
 
-  if (filter == "location") {
+  if (filter === "location") {
     locationsForm.style.display = "flex";
   } else {
     locationsForm.style.display = "none";
@@ -468,6 +468,7 @@ const subFiltersUnder = document.querySelector(".sub-filters-under");
 
 filtersContainer.addEventListener("click", (e) => {
   const chip = e.target.closest(".chip");
+
   if (!chip || !chip.dataset.filter) return;
 
   const filter = chip.dataset.filter;
@@ -488,7 +489,15 @@ filtersContainer.addEventListener("click", (e) => {
   activeFilter = filter;
   chip.classList.add("active");
   chip.setAttribute("aria-expanded", "true");
+
   renderSubChips(filter);
+
+  if (filter === "location") {
+    setTimeout(() => {
+      makeMap(56.4, 10.2039, 6);
+      window.map?.invalidateSize(true);
+    }, 100);
+  }
 });
 
 function hideAllSubForms() {
@@ -612,6 +621,14 @@ function clearAllFilters() {
     if (chip.hasAttribute("aria-pressed")) chip.setAttribute("aria-pressed", "false");
     if (chip.hasAttribute("aria-expanded")) chip.setAttribute("aria-expanded", "false");
   });
+
+  const allLocationsButton = document.querySelector(
+    '[data-location="alle"]'
+  );
+
+  allLocationsButton?.classList.add("active");
+  allLocationsButton?.setAttribute("aria-pressed", "true");
+
   locationData.textContent = "Vælg lokation";
   hideAllSubForms();
   history.replaceState({}, "", window.location.pathname);
@@ -975,9 +992,14 @@ function norm(str) {
 function flyToLocation(locationKey) {
   const loc = locationCoords[locationKey];
   if (locationData) {
-    locationData.innerText = locationKey
-      .replace(/-/g, " ")
-      .replace(/\b\w/g, (c) => c.toUpperCase());
+  locationData.innerText =
+    locationKey === "alle"
+      ? "Vælg lokation"
+      : locationKey
+          .replace(/-/g, " ")
+          .replace(/\b\w/g, (character) =>
+            character.toUpperCase()
+          );
   }
 
   if (!loc) return;

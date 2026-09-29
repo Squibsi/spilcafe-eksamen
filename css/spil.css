@@ -1,0 +1,95 @@
+.dice-page {
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+}
+
+.dice-page canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.dice-page nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.dice-page section {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  pointer-events: none;
+}
+
+.dice-page .panel {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.dice-page .panel > div {
+  padding: 1rem;
+  color: #3c390f;
+  font-weight: 700;
+}
+
+.dice-page section p {
+  margin-bottom: -0.5rem;
+  text-align: center;
+  color: #3c390f;
+}
+
+.dice-page section button {
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  color: #3c390f;
+  font-size: 4rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.75;
+  transition:
+    opacity 250ms ease,
+    transform 250ms ease;
+  pointer-events: auto;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.dice-page section button:hover {
+  opacity: 1;
+}
+
+.dice-page section button:active {
+  transform: scale(0.75);
+}
+
+.dice-page img {
+  user-select: none;
+}
+
+.dice-page .back {
+  width: 44px;
+  height: 44px;
+  padding: 16px;
+  color: #595959;
+  transition:
+    color 300ms ease,
+    transform 300ms ease;
+  transform: scale(1.4);
+}
+
+.dice-page .back:hover {
+  color: #ffffff;
+  transform: scale(1.5);
+}
