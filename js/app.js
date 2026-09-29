@@ -398,15 +398,19 @@ function renderSubChips(filter) {
   }
 }
 
-const greenIcon = L.icon({
-  iconUrl: "/assets/img/logo.webp", // 🔥 absolute path
+const greenIcon = window.L ? L.icon({
+  iconUrl: "./assets/img/logo.webp",
   iconSize: [50, 37],
-  iconAnchor: [25, 37], // 🔥 THIS IS REQUIRED
+  iconAnchor: [25, 37],
   popupAnchor: [0, -37],
-});
+}) : null;
 
 
 function makeMap(lat, lon, zoom = 6) {
+  if (!window.L) {
+    document.getElementById("map")?.setAttribute("aria-label", "Kortet kunne ikke indlæses");
+    return;
+  }
   if (!map) {
     map = L.map("map").setView([lat, lon], zoom);
     window.map = map;
@@ -464,13 +468,16 @@ const subFiltersUnder = document.querySelector(".sub-filters-under");
 
 filtersContainer.addEventListener("click", (e) => {
   const chip = e.target.closest(".chip");
-  if (!chip) return;
+  if (!chip || !chip.dataset.filter) return;
 
   const filter = chip.dataset.filter;
 
   filtersContainer
     .querySelectorAll(".chip")
-    .forEach((c) => c.classList.remove("active"));
+    .forEach((c) => {
+      c.classList.remove("active");
+      c.setAttribute("aria-expanded", "false");
+    });
 
   if (activeFilter === filter) {
     activeFilter = null;
@@ -480,6 +487,7 @@ filtersContainer.addEventListener("click", (e) => {
 
   activeFilter = filter;
   chip.classList.add("active");
+  chip.setAttribute("aria-expanded", "true");
   renderSubChips(filter);
 });
 
