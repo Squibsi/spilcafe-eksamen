@@ -189,14 +189,14 @@ function displayDrawer(id) {
         <div class="topInfo">
           <div class="gameinfo">
             <div>
-              <div class="title"><h2>${game.title}</h2></div>
-              <div class="shortDesc">${game.description}</div>
+              <div class="title"><h2 id="drawer-title">${title}</h2></div>
+              <div class="shortDesc">${escapeHTML(game.description)}</div>
             </div>
           </div>
-          <img src="${game.image}" alt="billede af ${game.title}">
+          <img src="${game.image}" alt="Spilæsken til ${title}" width="170" height="170" decoding="async">
         </div>
         <div class="info">
-          <div class="boks">Type: <span>${game.genre}</span></div>
+          <div class="boks">Type: <span>${escapeHTML(game.genre)}</span></div>
           <div class="boks">Sværhedsgrad: <span>
             ${renderRatingStars(
               game.difficulty === "Let"
@@ -211,66 +211,75 @@ function displayDrawer(id) {
     game.players.max
   }</span></div>
           <div class="boks">Alder: <span>+${game.age}</span></div>
-          <div class="boks">Hylde: <span>${game.shelf}</span></div>
+          <div class="boks">Placering i caféen: <span>Hylde ${escapeHTML(game.shelf)}</span></div>
         </div>
       </div>
-      <div class="drawer" onclick="toggleDrawer()">
-        <div class="drawHandle"></div>
-        <p>${game.rules}</p>
+      <div class="drawer">
+        <button type="button" class="drawer-toggle" aria-expanded="false">
+          <span class="drawHandle" aria-hidden="true"></span>
+          <span>Vis spilleregler</span>
+        </button>
+        <p class="drawer-rules" hidden>${escapeHTML(game.rules)}</p>
       </div>
-    </div>
+    </section>
   `;
   // Add overlay--active class after rendering for animation
   setTimeout(() => {
     const overlay = document.getElementById("drawerOverlay");
-    if (overlay) overlay.classList.add("overlay--active");
+    if (overlay) {
+      overlay.classList.add("overlay--active");
+      overlay.focus();
+    }
   }, 10);
 }
 
 function toggleDrawer() {
   const drawer = document.querySelector(".drawer");
-  if (drawer) drawer.classList.toggle("open");
+  const button = drawer?.querySelector(".drawer-toggle");
+  const rules = drawer?.querySelector(".drawer-rules");
+  if (!drawer || !button || !rules) return;
+  const open = !drawer.classList.contains("open");
+  drawer.classList.toggle("open", open);
+  button.setAttribute("aria-expanded", String(open));
+  rules.hidden = !open;
 }
 
 function renderRatingStars(rating) {
-  let starsHTML = '<div class="rating-dices">';
-
-  starsHTML += `
-  <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2.27778 0H14.7222C15.1937 0 15.6459 0.187301 15.9793 0.520699C16.3127 0.854097 16.5 1.30628 16.5 1.77778V14.2222C16.5 14.6937 16.3127 15.1459 15.9793 15.4793C15.6459 15.8127 15.1937 16 14.7222 16H2.27778C1.80628 16 1.3541 15.8127 1.0207 15.4793C0.687301 15.1459 0.5 14.6937 0.5 14.2222V1.77778C0.5 1.30628 0.687301 0.854097 1.0207 0.520699C1.3541 0.187301 1.80628 0 2.27778 0ZM8.5 6.22222C8.0285 6.22222 7.57632 6.40952 7.24292 6.74292C6.90952 7.07632 6.72222 7.5285 6.72222 8C6.72222 8.4715 6.90952 8.92368 7.24292 9.25708C7.57632 9.59048 8.0285 9.77778 8.5 9.77778C8.9715 9.77778 9.42368 9.59048 9.75708 9.25708C10.0905 8.92368 10.2778 8.4715 10.2778 8C10.2778 7.5285 10.0905 7.07632 9.75708 6.74292C9.42368 6.40952 8.9715 6.22222 8.5 6.22222Z" fill="${
-      rating >= 1 ? "black" : "#9F9F9F"
-    }"/>
-  </svg>
-`;
-  /* NOTE: keeping your remaining SVG block exactly as you had it */
-  // (Your full SVG chain continues unchanged below)
-  // ----------------------------
-  starsHTML += `
-<svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M2.27778 0H14.7222C15.1937 0 15.6459 0.187301 15.9793 0.520699C16.3127 0.854097 16.5 1.30628 16.5 1.77778V14.2222C16.5 14.6937 16.3127 15.1459 15.9793 15.4793C15.6459 15.8127 15.1937 16 14.7222 16H2.27778C1.80628 16 1.3541 15.8127 1.0207 15.4793C0.687301 15.1459 0.5 14.6937 0.5 14.2222V1.77778C0.5 1.30628 0.687301 0.854097 1.0207 0.520699C1.3541 0.187301 1.80628 0 2.27778 0ZM4.05556 1.77778C3.58406 1.77778 3.13187 1.96508 2.79848 2.29848C2.46508 2.63187 2.27778 3.08406 2.27778 3.55556C2.27778 4.02705 2.46508 4.47924 2.79848 4.81263C3.13187 5.14603 3.58406 5.33333 4.05556 5.33333C4.52705 5.33333 4.97924 5.14603 5.31263 4.81263C5.64603 4.47924 5.83333 4.02705 5.83333 3.55556C5.83333 3.08406 5.64603 2.63187 5.31263 2.29848C4.97924 1.96508 4.52705 1.77778 4.05556 1.77778ZM12.9444 10.6667C12.4729 10.6667 12.0208 10.854 11.6874 11.1874C11.354 11.5208 11.1667 11.9729 11.1667 12.4444C11.1667 12.9159 11.354 13.3681 11.6874 13.7015C12.0208 14.0349 12.4729 14.2222 12.9444 14.2222C13.4159 14.2222 13.8681 14.0349 14.2015 13.7015C14.5349 13.3681 14.7222 12.9159 14.7222 12.4444C14.7222 11.9729 14.5349 11.5208 14.2015 11.1874C13.8681 10.854 13.4159 10.6667 12.9444 10.6667Z" fill="${
-    rating >= 2 ? "black" : "#9F9F9F"
-  }"/>
-</svg>
-`;
-  /* ... keep your remaining 3–6 dice svgs unchanged ... */
-  // For brevity in THIS message: I’m keeping them as-is.
-  // If you want, I can paste the SVG continuation too, but it is unchanged from your original.
-
-  starsHTML += "</div>";
-  return starsHTML;
+  const active = Math.max(0, Math.min(6, Number(rating) || 0));
+  const dice = Array.from({ length: 6 }, (_, index) =>
+    `<span class="rating-die${index < active ? " is-active" : ""}" aria-hidden="true"></span>`
+  ).join("");
+  return `<span class="rating-dices" aria-label="Sværhedsgrad ${active} ud af 6">${dice}</span>`;
 }
 
 function closeDrawer() {
-  console.log("closeDrawer");
   const overlay = document.getElementById("drawerOverlay"); // FIX: id changed
   if (overlay) {
     overlay.classList.remove("overlay--active");
     // Remove overlay from DOM after transition
     setTimeout(() => {
       if (overlay.parentNode) overlay.parentNode.innerHTML = "";
+      lastFocusedElement?.focus();
     }, 400); // match CSS transition duration
   }
 }
+
+drawHolder.addEventListener("click", (event) => {
+  if (event.target.closest("[data-close-dialog]")) closeDrawer();
+  if (event.target.closest(".drawer-toggle")) toggleDrawer();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && document.getElementById("drawerOverlay")) {
+    closeDrawer();
+  }
+  if (
+    event.key === "Escape" &&
+    document.getElementById("shakePopup")?.style.display !== "none"
+  ) {
+    closeShakePopup();
+  }
+});
 
 function filterGames() {
   let filteredGames = [...allGames];
@@ -353,45 +362,9 @@ function renderSubChips(filter) {
 
   if (filter == "location") {
     locationsForm.style.display = "flex";
-  }else{
+  } else {
     locationsForm.style.display = "none";
   }
-
-  
-// #1 LOCATION FILTER + MAP FLY
-locationsForm?.addEventListener("click", (e) => {
-  const chip = e.target.closest(".chip");
-  if (!chip) return;
-
-  const location = chip.dataset.location;
-
-const coords = locationCoords[location];
-if (coords) {
-  makeMap(coords.lat, coords.lng, coords.zoom);
-  flyToLocation(location);
-}
-
-
-  locationsForm
-    .querySelectorAll(".chip")
-    .forEach((c) => c.classList.remove("active"));
-  chip.classList.add("active");
-
-  selected.location = location;
-
-  if (selected.location == "alle") {
-    selected.location = null;
-  }
-
-  flyToLocation(location);
-
-  const params = new URLSearchParams(selected);
-  history.replaceState({}, "", "?" + params.toString());
-
-  filterGames();
-});
-
-
 
   // FIX: was height="flex" (invalid). Use display.
   if (filter == "players") {
