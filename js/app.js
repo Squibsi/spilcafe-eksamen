@@ -652,12 +652,18 @@ function shakeItToTheMax() {
 
 function closeShakePopup() {
   const popup = document.getElementById("shakePopup");
-  if (popup) popup.style.display = "none";
+  if (popup) {
+    popup.style.display = "none";
+    shakeButton?.focus();
+  }
 }
 
 function openShakePopup() {
   const popup = document.getElementById("shakePopup");
-  if (popup) popup.style.display = "flex";
+  if (popup) {
+    popup.style.display = "flex";
+    enableShakeButton?.focus();
+  }
 }
 
 window.addEventListener("popstate", () => {
@@ -780,6 +786,8 @@ window.handleMotion = handleMotion; // keep your access pattern
 
 function testForIphone() {
   closeShakePopup();
+
+  if (!allGames.length) return;
 
   const randomGame2 = allGames[Math.floor(Math.random() * allGames.length)];
 
@@ -1005,19 +1013,21 @@ locationsForm?.addEventListener("click", (e) => {
   
   
   const location = chip.dataset.location;
-  
   const coords = locationCoords[location];
-  makeMap(coords.lat, coords.lng, coords.zoom);
-  
   if (coords) {
+    makeMap(coords.lat, coords.lng, coords.zoom);
     flyToLocation(location);
-}
+  }
 
 
   locationsForm
     .querySelectorAll(".chip")
-    .forEach((c) => c.classList.remove("active"));
+    .forEach((c) => {
+      c.classList.remove("active");
+      c.setAttribute("aria-pressed", "false");
+    });
   chip.classList.add("active");
+  chip.setAttribute("aria-pressed", "true");
 
   selected.location = location;
 
@@ -1060,5 +1070,3 @@ syncDifficultyActive();
 difficultyForm?.addEventListener("change", (e) => {
   if (e.target && e.target.name === "difficulty") syncDifficultyActive();
 });
-
-
