@@ -550,9 +550,11 @@ genreForm.addEventListener("click", (e) => {
   if (selected.genre.includes(genre)) {
     selected.genre = selected.genre.filter((g) => g !== genre);
     chip.classList.remove("active");
+    chip.setAttribute("aria-pressed", "false");
   } else {
     selected.genre.push(genre);
     chip.classList.add("active");
+    chip.setAttribute("aria-pressed", "true");
   }
 
   const params = new URLSearchParams(selected);
@@ -572,9 +574,13 @@ sortForm.addEventListener("click", (e) => {
 
   sortForm
     .querySelectorAll(".chip")
-    .forEach((c) => c.classList.remove("active"));
+    .forEach((c) => {
+      c.classList.remove("active");
+      c.setAttribute("aria-pressed", "false");
+    });
 
   chip.classList.add("active");
+  chip.setAttribute("aria-pressed", "true");
 
   const params = new URLSearchParams(selected);
   history.replaceState({}, "", "?" + params.toString());
@@ -593,6 +599,30 @@ function removeSelectedFilter(filter) {
   const params = new URLSearchParams(selected);
   history.replaceState({}, "", "?" + params.toString());
 }
+
+function clearAllFilters() {
+  selected = {};
+  activeFilter = null;
+  document.getElementById("searchInput").value = "";
+  document.querySelectorAll('input[type="radio"]').forEach((input) => {
+    input.checked = false;
+  });
+  document.querySelectorAll(".chip.active").forEach((chip) => {
+    chip.classList.remove("active");
+    if (chip.hasAttribute("aria-pressed")) chip.setAttribute("aria-pressed", "false");
+    if (chip.hasAttribute("aria-expanded")) chip.setAttribute("aria-expanded", "false");
+  });
+  locationData.textContent = "Vælg lokation";
+  hideAllSubForms();
+  history.replaceState({}, "", window.location.pathname);
+  displayGames(allGames);
+  document.getElementById("chip-info")?.focus();
+}
+
+clearFiltersButton?.addEventListener("click", clearAllFilters);
+shakeButton?.addEventListener("click", openShakePopup);
+enableShakeButton?.addEventListener("click", closeShakeAndEnableMotion);
+chooseRandomGameButton?.addEventListener("click", testForIphone);
 
 /* 
 Hej kære lærer, kom i også så dybt ned i koden?
