@@ -21,6 +21,20 @@ const difficultyForm = document.querySelector(".difficultyForm");
 const genreForm = document.querySelector(".genreForm");
 const sortForm = document.querySelector(".sortForm");
 const mainHolder = document.querySelector("main");
+const clearFiltersButton = document.getElementById("clearFiltersChip");
+const shakeButton = document.getElementById("shakeButton");
+const enableShakeButton = document.getElementById("enableShake");
+const chooseRandomGameButton = document.getElementById("chooseRandomGame");
+let lastFocusedElement = null;
+
+function escapeHTML(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
 const radioInputs = document.querySelectorAll('input[type="radio"]');
 const underline = document.querySelector(".underline");
@@ -78,7 +92,13 @@ async function getGames() {
 function displayGames(games) {
   resultater.innerHTML = "";
 
+  const activeFilterCount = Object.values(selected).filter((value) =>
+    Array.isArray(value) ? value.length > 0 : value !== null && value !== ""
+  ).length;
+  clearFiltersButton?.classList.toggle("hidden", activeFilterCount === 0);
+
   if (!games.length) {
+    document.getElementById("chip-info").innerText = `0 af ${allGames.length} spil fundet`;
     resultater.insertAdjacentHTML(
       "beforeend",
       '<div class="game-list-empty"><p>Ingen spil matchede dine filtre...</p></div>'
@@ -86,10 +106,9 @@ function displayGames(games) {
     return;
   }
 
-  console.log(`🎬 Viser ${games.length} game`);
   document.getElementById(
     "chip-info"
-  ).innerText = `${games.length} / ${allGames.length} spil`;
+  ).innerText = `${games.length} af ${allGames.length} spil fundet`;
 
   for (const game of games) {
     displayGame(game);
