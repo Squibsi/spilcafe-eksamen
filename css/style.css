@@ -233,6 +233,9 @@ h1 {
 main {
   padding: 16px;
   padding-top: 128px;
+}
+
+.results {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
@@ -240,7 +243,7 @@ main {
   justify-content: space-around;
 }
 
-main::after {
+.results::after {
   content: "";
   flex: auto;
 }
@@ -254,11 +257,21 @@ main::after {
   align-items: center;
   background: #fff;
   /* max-width: 169px; */
-  width: 140px;
-  height: 215px;
+  width: min(100%, 168px);
+  min-height: 228px;
   padding: 14px;
   border-radius: 18px;
   box-shadow: 1px 1px 1px 1px #00000025;
+}
+
+button.card {
+  color: inherit;
+  text-align: inherit;
+}
+
+.card:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 4px;
 }
 
 .card img {
@@ -412,7 +425,7 @@ main::after {
 }
 
 .drawHandle {
-  background: #BF171C;
+  background: var(--primary-color);
   height: 5px !important;
   width: 48px;
   border-radius: 8px;
