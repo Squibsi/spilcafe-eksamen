@@ -47,8 +47,6 @@ html {
   --card-background: #FFFFFF;
 }
 
-/* DarkMode! */
-
 
 /* RESPONSIVE! */
 
@@ -87,7 +85,6 @@ header {
   display: flex;
   border-radius: 9px;
   margin: 0 8px;
-  /* background-color: #ebebeb; */
   border: 1px solid var(--primary-color);
   width: 100%;
   height: 43px;
@@ -102,7 +99,6 @@ header {
 .filters button {
   height: auto;
   background-color: #fff;
-  /* border: 1px solid #A1A1A1; */
   padding: 8px 12px;
   border-radius: 8px;
   color: #0a0a0a;
@@ -125,14 +121,6 @@ button {
   outline: 3px solid #1d4ed8;
   outline-offset: 3px;
 }
-
-/* .searchInput {
-    height: 43px;
-    border-radius: 8px;
-    padding: 0px 12px;
-    background-color: #ebebeb;
-
-} */
 
 button svg,
 .searchInput svg {
@@ -169,31 +157,7 @@ h1 {
   position: relative;
 }
 
-/* .filters::-webkit-scrollbar {
-  display: none;
-  /* hide scrollbar (Chrome, Safari) 
-} */
-
-/*sub-filters-under*/
-/* ::-webkit-scrollbar {
-  height: 1px;
-}
-
-::-webkit-scrollbar-track {
-  background: #fff; 
-}
- 
-::-webkit-scrollbar-thumb {
-  background: #FF4747; 
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #FF4747; 
-} */
-
 .chip {
-  /* background: #FF9292; */
-  /*active FF4747*/
   display: flex;
   gap: 4px;
   align-items: center;
@@ -213,7 +177,6 @@ h1 {
 
 .chip:hover {
   cursor: pointer;
-  /* background: #FF4747; */
 }
 
 
@@ -244,7 +207,6 @@ main {
   flex-direction: column;
   align-items: center;
   background: #fff;
-  /* max-width: 169px; */
   width: min(100%, 168px);
   min-height: 228px;
   padding: 14px;
@@ -278,9 +240,7 @@ button.card {
 
 .card__imageHolder {
   width: 120px;
-  /* max-width: 145px; */
   height: 120px;
-  /* max-height: 145px; */
   border-radius: 8px;
   background: #E3E3E3;
   display: flex;
@@ -330,8 +290,6 @@ button.card {
 }
 
 /* Overlay + drawer */
-
-
 .overlay {
   font-family: "Inter", sans-serif;
   overflow: hidden;
@@ -540,16 +498,12 @@ button.card {
 }
 
 .chip-dropdown {
-  /* position: fixed; */
-  /* z-index: 10000; */
   padding: 10px;
   display: flex;
   overflow-x: auto;
-  /* flex-direction: column; */
   gap: 4px;
   background: #fff;
   border-radius: 8px;
-  /* width: 100px; */
   margin: 8px 0px;
 }
 
@@ -563,10 +517,6 @@ button.card {
   border-radius: 8px;
 }
 
-/* .chip-dropdown::-webkit-scrollbar {
-  display: none;
-} */
-
 /* Invisible overlay for sub-filters dropdown */
 .sub-filters-overlay {
   position: fixed;
@@ -579,8 +529,6 @@ button.card {
   display: none;
 }
 
-/*chips overlay from ai*/
-/* NOT WORKING YET */
 
 .sub-filters {
   display: flex;
@@ -595,11 +543,8 @@ button.card {
   border: 1px solid #A1A1A1;
   border-radius: 8px;
   z-index: 200;
-  /* Increased z-index for higher stacking */
   left: 50%;
-  /* Center horizontally */
   transform: translateX(-50%);
-  /* Adjust for centering */
 }
 
 .sub-filters .sub-chip {
@@ -757,23 +702,6 @@ button.card {
 .popup-content button:hover {
   background: #7f0d11;
 }
-
-
-/* nice picker NOP and Difficulty level. */
-
-/* html, body {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Nunito", sans-serif;
-  color: #000;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-} */
 
 #form-wrapper {
   width: 100%;
@@ -1089,7 +1017,6 @@ form:invalid+button {
 .active {
   border-color: var(--primary-color);
   font-weight: 600;
-  /* background-color: var(--primary-color-light); */
 }
 
 .locationsForm {

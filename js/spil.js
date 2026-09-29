@@ -72,7 +72,6 @@ orbit.dampingFactor = 0.05
 orbit.rotateSpeed = 0.5
 orbit.enablePan = false
 orbit.enableZoom = false
-//orbit.addEventListener('end', resetCameraPosition)
 orbit.update()
 
 // Dice
@@ -152,17 +151,6 @@ directionalLight.shadow.camera.bottom = -20
 directionalLight.shadow.mapSize.width = 2048
 directionalLight.shadow.mapSize.height = 2048
 directionalLight.shadow.bias = -0.0005
-
-// Fog
-//scene.fog = new THREE.FogExp2(0xffffff, 0.01)
-
-// function removeDices() {
-//   dices.forEach(dice => {
-//     scene.remove(dice.model)
-//     world.clear()
-//   })
-//   dices = []
-// }
 
 function removeDices() {
   dices.forEach(dice => {

@@ -1,11 +1,7 @@
 #map {
-    /* position: fixed;
-    bottom: 16px;
-    right: 16px; */
     height: 350px;
     width: 100%;
     border-radius: 15px;
-    /* allow touch interactions for maps on mobile */
     touch-action: auto;
 }
 

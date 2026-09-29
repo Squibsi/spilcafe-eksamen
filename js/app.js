@@ -641,11 +641,7 @@ shakeButton?.addEventListener("click", openShakePopup);
 enableShakeButton?.addEventListener("click", closeShakeAndEnableMotion);
 chooseRandomGameButton?.addEventListener("click", testForIphone);
 
-/* 
-Hej kære lærer, kom i også så dybt ned i koden?
-Sig skål til en af os (Simon, Mathilde, Oliver eller Jacob)
-Så udløser i en øl i basement, fordi i fandt vores easter egg!
-*/
+
 function shakeItToTheMax() {
   console.log("Shake it to the max!");
 
@@ -740,11 +736,7 @@ window.addEventListener("popstate", () => {
   displayGames(filteredGames);
 });
 
-/* =========================
-   FIX: duplicate id="overlay" collision
-   - This injected overlay is for showGame()
-   - Drawer uses #drawerOverlay
-========================= */
+
 document.body.insertAdjacentHTML(
   "beforeend",
   `
@@ -763,9 +755,7 @@ let lastShake = 0;
 const SHAKE_THRESHOLD = 700;
 const COOLDOWN = 1000;
 
-/* =========================
-   FIX: handleMotion must be a real identifier, not only a named function-expression on window
-========================= */
+
 function handleMotion(e) {
   const acc = e.accelerationIncludingGravity;
   if (!acc) return;
@@ -850,7 +840,7 @@ document.addEventListener("click", (e) => {
 // Only attach devicemotion after permission is granted (for iOS)
 function enableShakeDetection() {
   console.log("🔧 Attempting to enable shake detection...");
-  window.removeEventListener("devicemotion", handleMotion); // FIX: now valid
+  window.removeEventListener("devicemotion", handleMotion);
 
   if (
     typeof DeviceMotionEvent !== "undefined" &&
@@ -880,9 +870,6 @@ function enableShakeDetection() {
   }
 }
 
-/* =========================
-   FIX: keep ONLY one closeShakeAndEnableMotion (user gesture-safe)
-========================= */
 function closeShakeAndEnableMotion() {
   closeShakePopup();
   enableShakeDetection();
@@ -1010,7 +997,6 @@ function flyToLocation(locationKey) {
     return;
   }
 
-  // FIX: ensure local map variable matches window.map
   map = window.map;
 
   map.flyTo([loc.lat, loc.lng], loc.zoom, {
@@ -1028,7 +1014,6 @@ window.addEventListener("orientationchange", () => {
   }
 });
 
-// #1 LOCATION FILTER + MAP FLY
 locationsForm?.addEventListener("click", (e) => {
   const chip = e.target.closest(".chip");
   if (!chip) return;
