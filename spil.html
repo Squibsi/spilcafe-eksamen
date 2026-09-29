@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spil ;&rpar; -caféen</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
+</head>
+
+<body>
+    <nav>
+    <div class="header-top">
+      <a class="back" alt="go back to index" href="/index.html">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            </a>
+        </div>
+
+
+
+</nav>
+<section>
+  <div class="panel">
+    <button id="decrease">-</button>
+    <div>
+      <p>AMOUNT: <span id="amount">2</span></p>
+      <button id="roll"><img src="./assets/img/logo.webp" width="92" height="70" alt="logo">
+</button>
+    </div>
+    <button id="increase">+</button>
+  </div>
+</section>
+
+<style>
+    body,
+button {
+  font-family: "Cherry Bomb One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+body canvas,
+button canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+body nav,
+button nav {
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+  z-index: 10;
+  width: 100%;
+  /* pointer-events: none; */
+}
+body nav h1,
+button nav h1 {
+  padding: 0.75rem;
+  line-height: 0.85;
+  font-size: 2.25rem;
+  color: #3c390f;
+}
+body nav h5,
+button nav h5 {
+  padding: 0.75rem;
+  color: #3c390f;
+  opacity: 0.75;
+  pointer-events: auto;
+}
+body nav h5 a img,
+button nav h5 a img {
+  width: 1.5rem;
+}
+body section,
+button section {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  pointer-events: none;
+}
+body section .panel,
+button section .panel {
+  display: flex;
+  gap: 1.5rem;
+
+}
+button section .panel button,
+button section .panel div{
+padding:1rem;
+  color: #3c390f;
+  font-weight: 700;
+}
+
+body section p,
+button section p {
+  margin-bottom: -0.5rem;
+  text-align: center;
+  color:#3c390f;
+}
+body section button,
+button section button {
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  background: none;
+  border: none;
+  line-height: 1;
+  font-size: 4rem;
+  color: #3c390f;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: 250ms;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+}
+
+img{
+  user-select: none;
+}
+
+body section button:hover,
+button section button:hover {
+  opacity: 1;
+}
+body section button:active,
+button section button:active {
+  transform: scale(0.75);
+}
+
+.back{
+  transform: scale(1.4);
+  color:#999;
+  padding:16px;
+  transition: ease-in-out 0.3s;
+}
+
+.back:hover{
+  transform: scale(1.5);
+  color:#fff;
+}
+</style>
+
+
+<script type="module" src="./js/spil.js"></script>
+
+</body>
+</html>

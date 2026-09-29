@@ -1,0 +1,21 @@
+{
+  "name": "Spilcafe Exam",
+  "short_name": "Spilcafe",
+  "start_url": "/spilcafe-exam/",
+  "scope": "/spilcafe-exam/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#bf171c",
+  "icons": [
+    {
+      "src": "/assets/img/logo.webp",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/logo.webp",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
